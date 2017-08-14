@@ -25,10 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    listadoble.cpp \
+    nodo.cpp \
+    dias.cpp \
+    listasimple.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    listadoble.h \
+    dias.h \
+    nodo.h \
+    listasimple.h
 
 FORMS += \
         mainwindow.ui
