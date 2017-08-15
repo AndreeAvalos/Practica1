@@ -28,15 +28,17 @@ SOURCES += \
         mainwindow.cpp \
     listadoble.cpp \
     nodo.cpp \
-    dias.cpp \
-    listasimple.cpp
+    listasimple.cpp \
+    evento.cpp \
+    dias.cpp
 
 HEADERS += \
         mainwindow.h \
     listadoble.h \
-    dias.h \
     nodo.h \
-    listasimple.h
+    listasimple.h \
+    evento.h \
+    dias.h
 
 FORMS += \
         mainwindow.ui

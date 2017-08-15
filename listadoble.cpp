@@ -13,7 +13,7 @@ ListaDoble<T>::ListaDoble()
 //Metodo para verificar la lista
 template <typename T>
 bool ListaDoble<T>::empty(){
-    if(first == nullptr){//Si es nulla de vuelvo true, de lo contrario false
+    if(first == nullptr){//Si es nula de vuelvo true, de lo contrario false
         return true;
     }else
         return false;
