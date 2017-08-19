@@ -1,6 +1,6 @@
 #include "evento.h"
 template <typename  T>
-evento::evento()
+evento<T>::evento()
 {
 this->titulo="";
     this->descripcion="";

@@ -3,7 +3,7 @@
 #include "string.h"
 #include"listasimple.h"
 
-
+template <class T>
 class evento
 {
 private:
