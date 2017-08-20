@@ -30,7 +30,8 @@ SOURCES += \
     nodo.cpp \
     listasimple.cpp \
     evento.cpp \
-    dias.cpp
+    dias.cpp \
+    listadenlazada.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS += \
     nodo.h \
     listasimple.h \
     evento.h \
-    dias.h
+    dias.h \
+    listadenlazada.h
 
 FORMS += \
         mainwindow.ui

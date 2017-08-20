@@ -18,8 +18,10 @@ public:
     void add(T);
     void imprimir();
     bool empty();
+
     Nodo<T> *root;
     int size;
+
     T getValor(int inde){
         Nodo<T> *temp = root;
         T valor;
@@ -28,6 +30,7 @@ public:
         }
         valor = temp->data;
     }
+
 private:
 
 };
