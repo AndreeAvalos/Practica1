@@ -1,5 +1,6 @@
 #include "listasimple.h"
 #include "nodo.cpp"
+#include "nodo.h"
 #include"iostream"
 #include <QtDebug>
 
