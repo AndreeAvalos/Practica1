@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>441</height>
+    <height>395</height>
    </rect>
   </property>
   <property name="cursor">
@@ -36,7 +36,7 @@
      <item row="0" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -645,13 +645,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QListWidget" name="Eventos">
-       <item>
-        <property name="text">
-         <string>Evento1</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QListWidget" name="Eventos"/>
      </item>
     </layout>
    </widget>

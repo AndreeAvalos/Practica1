@@ -43,8 +43,7 @@ template<typename T>
 void ListaSimple<T>::imprimir(){
     Nodo<T> *temp = root;//creamos un temporal para poder recorrecorlo
     while(temp!= nullptr){//miramos si el valor es el ultimo nodo
-        Lugares lugar = temp->data;
-        qInfo() << lugar.toString();//imprimimos el valor en consola
+        qInfo() << temp->data.titulo;//imprimimos el valor en consola
         temp = temp->Siguiente;//cambiamos de nodo
     }
 }

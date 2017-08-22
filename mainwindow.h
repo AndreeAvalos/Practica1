@@ -44,11 +44,21 @@ private slots:
 
     void on_btnguardar_clicked();
 
+    void on_Eventos_clicked(const QModelIndex &index);
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
      ListaDEnlazada<Contacto> *lstContactos = new ListaDEnlazada<Contacto>();
      ListaSimple<Lugares> *lstlugares = new ListaSimple<Lugares>();
      ListaDoble<Dias> *lstdias = new ListaDoble<Dias>();
+     ListaSimple<Evento> eventoE;
+     Nodo<Dias> *proceso = lstdias->first;
 };
 
 #endif // MAINWINDOW_H

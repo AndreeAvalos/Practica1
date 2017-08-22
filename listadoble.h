@@ -5,6 +5,8 @@
 #include <string>
 #include <stdlib.h>
 #include "nodo.h"
+#include "evento.h"
+#include "dias.h"
 
 using namespace std;
 
@@ -17,14 +19,15 @@ public:
     bool empty();//verifica si esta vacia
     void imprimir();//metodo para imprimir lista
 
-    T getEvento(int dia, int mes, int year){
+    ListaSimple<Evento> getEvento(int dia, int mes, int year){
         Nodo<T> *temp = first;
-        T valor =nullptr;
+        ListaSimple<Evento> valor;
 
         while(temp!=nullptr){
 
             if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
-                valor = temp->data.Eventos;
+                Dias actual=temp->data;
+                valor = actual.Eventos;
              return valor;
             }
             temp =temp->Siguiente;
@@ -33,7 +36,20 @@ public:
 
     }
 
-private:
+    bool buscar(int dia, int mes, int year){
+         Nodo<T> *temp = first;
+         if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
+             return true;
+         }
+        while(temp->Siguiente!=first){
+            if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
+             return true;
+            }
+            temp =temp->Siguiente;
+        }
+        return false;
+    }
+
     Nodo<T> *first, *last;
     int size;
 };

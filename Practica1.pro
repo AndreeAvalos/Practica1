@@ -33,7 +33,8 @@ SOURCES += \
     contacto.cpp \
     lugares.cpp \
     dias.cpp \
-    eventos.cpp
+    evento.cpp \
+    listaenlazadao.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +45,10 @@ HEADERS += \
     contacto.h \
     lugares.h \
     dias.h \
-    eventos.h
+    evento.h \
+    listaenlazadao.h
 
 FORMS += \
         mainwindow.ui
+
+DISTFILES +=
