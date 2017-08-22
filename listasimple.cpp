@@ -1,9 +1,8 @@
 #include "listasimple.h"
-#include "nodo.cpp"
-#include "nodo.h"
-#include"iostream"
+#include "iostream"
 #include <QtDebug>
-
+#include "lugares.h"
+#include "nodo.h"
 
 using namespace std;
 
@@ -37,15 +36,15 @@ void ListaSimple<T>::add(T dato){
 
     }
     size++; //aumentamos el tamano de la lista
-    delete [] nuevo;//eliminamos el espacio en memoria del nuevo
+
 }
 //metodo para imprimir
 template<typename T>
 void ListaSimple<T>::imprimir(){
     Nodo<T> *temp = root;//creamos un temporal para poder recorrecorlo
     while(temp!= nullptr){//miramos si el valor es el ultimo nodo
-        qInfo() << temp->data;//imprimimos el valor en consola
+        Lugares lugar = temp->data;
+        qInfo() << lugar.toString();//imprimimos el valor en consola
         temp = temp->Siguiente;//cambiamos de nodo
     }
-    delete [] temp;
 }

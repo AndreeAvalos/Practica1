@@ -22,13 +22,14 @@ public:
     Nodo<T> *root;
     int size;
 
-    T getValor(int inde){
-        Nodo<T> *temp = root;
-        T valor;
-        for(int i=0; i<inde;i++){
+    T getValor(int inde){//Metodo par obtener el valor del nodo m
+        Nodo<T> *temp = root;//hacemos un temporal que sea igual a la raiz
+        T valor;//cremaos un valor T
+        for(int i=0; i<inde;i++){//recorremos el temporal hasta el indice
             temp=temp->Siguiente;
         }
-        valor = temp->data;
+        valor = temp->data;//Hacemos el valor con el valor deseado
+        return valor;
     }
 
 private:

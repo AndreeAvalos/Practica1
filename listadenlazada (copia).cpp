@@ -80,7 +80,7 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
 {
     Nodo<T> *nuevo = new Nodo<T>(val);
             if(first==nullptr){
-
+                qInfo() << "Primer elemento de la lista";
                 first = nuevo;
                 size++;
                 return;
@@ -94,7 +94,7 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                 //Si el valor nuevo es mayor que el unico valor de la lista,
                 //insertar despues del primero, en otras palabras INSERTAR AL FINAL
                 if(comparison > 0) {
-
+                    qInfo() << "Insertar directamente al final";
                     first->Siguiente = nuevo;
                     nuevo->Anterior=first;
                     size++;
@@ -104,7 +104,7 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                 //Si el valor nuevo es menor que el unico valor de la lista,
                 //insertar antes del primero, en otras palabras INSERTAR AL INICIO
                 if(comparison < 0) {
-
+                    qInfo() << "Insertar directamente al inicio";
                     nuevo->Siguiente = first;
                     first->Anterior=nuevo;
                     first = nuevo;
@@ -113,7 +113,7 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                 }
 
                 //Si no es mayor, ni tampoco es menor, entonces los elementos son iguales...
-
+                qInfo() << "Elemento repetido";
                 return;
             }
 
@@ -135,12 +135,12 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                 //El nuevo elemento va entre el elemento apuntado por ANT y AUX
                 if(comparison < 0) {
                     if(ant==nullptr) {
-
+                        qInfo() << "Insertando al inicio, antes de: " << aux->data.toString();
                         nuevo->Siguiente = first;
                         first->Anterior=nuevo;
                         first = nuevo;
                     } else {
-
+                        qInfo() <<nuevo->data.toString() << "Insertando entre: " << ant->data.toString() << " y " << aux->data.toString();
                         ant->Siguiente = nuevo;
                         nuevo->Anterior=ant;
                         nuevo->Siguiente = aux;
@@ -150,9 +150,11 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                     return;
                 }
 
+                qInfo() << "Elemento repetido";
                 return;
             }
 
+            qInfo() << "Insertado al final"<<nuevo->data.toString();
             aux->Siguiente = nuevo;
             nuevo->Anterior=aux;
             size++;

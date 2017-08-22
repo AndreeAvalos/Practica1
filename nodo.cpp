@@ -4,7 +4,6 @@
 template<typename T>
 Nodo<T>::Nodo()
 {
-   this->data= nullptr;
    this->Siguiente= nullptr;
    this->Anterior= nullptr;
 }

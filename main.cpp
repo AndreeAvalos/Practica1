@@ -2,8 +2,6 @@
 #include <QApplication>
 #include <QtDebug>
 #include <iostream>
-#include "listadoble.h"
-#include "listadoble.cpp"
 using namespace std;
 
 int main(int argc, char *argv[])

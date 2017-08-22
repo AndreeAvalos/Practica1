@@ -1,7 +1,7 @@
 #include "listadoble.h"
-#include "nodo.cpp"
-#include"iostream"
+#include "iostream"
 #include <QtDebug>
+#include "nodo.h"
 //Constructor por defecto
 template <typename T>
 ListaDoble<T>::ListaDoble()
@@ -39,12 +39,12 @@ void ListaDoble<T>::add(T dato){
 }
 template <typename T>
 void ListaDoble<T>::imprimir(){
-    Nodo<T> *temp = first;
-    while (temp->Siguiente!=first) {
-        qInfo()<< temp->data;
-        temp = temp->Siguiente;
+    Nodo<T> *temp = first;//creamos un nodo temporal
+    while (temp->Siguiente!=first) {//Recorremos mientras el temporal sea diferente del primero
+        qInfo()<< temp->data;//imprimimos
+        temp = temp->Siguiente;//el temporal es el siguiente
     }
-    qInfo()<<temp->data;
+    qInfo()<<temp->data;//imprimimos el ultimo elemento
 
 }
 

@@ -1,11 +1,6 @@
 #include "evento.h"
-template <typename  T>
-evento<T>::evento()
+
+Evento::Evento()
 {
-this->titulo="";
-    this->descripcion="";
-    this->duracion="";
-    this->fecha="";
-    this->hInicio="";
-    this->contactos=nullptr;
+
 }

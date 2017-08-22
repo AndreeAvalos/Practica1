@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>433</height>
+    <height>441</height>
    </rect>
   </property>
   <property name="cursor">
@@ -33,10 +33,10 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
+     <item row="0" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -62,7 +62,7 @@
         <attribute name="title">
          <string>Contactos</string>
         </attribute>
-        <widget class="QListWidget" name="listWidget">
+        <widget class="QListWidget" name="lstcontacts">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -72,47 +72,46 @@
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit">
+        <widget class="QPushButton" name="btnagregar">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="geometry">
           <rect>
            <x>260</x>
-           <y>0</y>
-           <width>181</width>
-           <height>211</height>
+           <y>10</y>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
+         <property name="text">
+          <string>+</string>
+         </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="btneditar">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
-           <x>620</x>
-           <y>0</y>
+           <x>430</x>
+           <y>180</y>
            <width>89</width>
            <height>25</height>
           </rect>
          </property>
          <property name="text">
-          <string>Agregar</string>
+          <string>Guardar</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="btneliminar">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="geometry">
           <rect>
-           <x>620</x>
-           <y>30</y>
-           <width>89</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Editar</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="geometry">
-          <rect>
-           <x>620</x>
-           <y>60</y>
+           <x>520</x>
+           <y>180</y>
            <width>89</width>
            <height>25</height>
           </rect>
@@ -158,6 +157,424 @@
          </property>
          <property name="text">
           <string>Por Apellido</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>10</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Nombre</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>30</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Apellidos</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>50</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Nickname</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>70</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Correo</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_5">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>100</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edad</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_6">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>120</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Telefono</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnCguardar">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>50</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>S</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Cname">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>10</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Capeliido">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>30</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Cnickname">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>50</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Ccorreo">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>70</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Cedad">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>90</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Ctelefono">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>110</y>
+           <width>171</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnCcancelar">
+         <property name="geometry">
+          <rect>
+           <x>680</x>
+           <y>10</y>
+           <width>31</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>x</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>Cargar</string>
+        </attribute>
+        <widget class="QPlainTextEdit" name="C_Json">
+         <property name="geometry">
+          <rect>
+           <x>93</x>
+           <y>0</y>
+           <width>621</width>
+           <height>331</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_12">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Importar</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_13">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>30</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Exportar</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_6">
+        <attribute name="title">
+         <string>Lugares</string>
+        </attribute>
+        <widget class="QListWidget" name="lstplaces">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>256</width>
+           <height>311</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnguardar">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>290</x>
+           <y>150</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Guardar</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_7">
+         <property name="geometry">
+          <rect>
+           <x>290</x>
+           <y>20</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Nombre</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8">
+         <property name="geometry">
+          <rect>
+           <x>290</x>
+           <y>50</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Latitud</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_9">
+         <property name="geometry">
+          <rect>
+           <x>290</x>
+           <y>80</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Longitud</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_10">
+         <property name="geometry">
+          <rect>
+           <x>290</x>
+           <y>110</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Direccion</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Lnombre">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>20</y>
+           <width>191</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Llatitud">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>50</y>
+           <width>113</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Llongitud">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>80</y>
+           <width>113</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="Ldireccion">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>110</y>
+           <width>321</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnNuevo">
+         <property name="geometry">
+          <rect>
+           <x>678</x>
+           <y>10</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>10</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>S</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnLcancel">
+         <property name="geometry">
+          <rect>
+           <x>580</x>
+           <y>10</y>
+           <width>31</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>x</string>
          </property>
         </widget>
        </widget>
@@ -242,36 +659,51 @@
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>260</y>
-      <width>291</width>
-      <height>111</height>
+      <y>270</y>
+      <width>231</width>
+      <height>101</height>
      </rect>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1024</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuCargar">
-    <property name="title">
-     <string>Cargar</string>
+   <widget class="QPushButton" name="pushButton_9">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>270</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>C</string>
     </property>
    </widget>
-   <addaction name="menuCargar"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QPushButton" name="pushButton_10">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>300</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>M</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_11">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>330</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>E</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAgregar">
@@ -287,6 +719,11 @@
   <action name="actionModificar">
    <property name="text">
     <string>Modificar</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
    </property>
   </action>
  </widget>

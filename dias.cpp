@@ -1,16 +1,17 @@
 #include "dias.h"
-template<typename T>
-dias<T>::dias()
+#include "listasimple.cpp"
+
+Dias::Dias()
 {
-    this->Eventos=nullptr;
-    this.numd=0;
-    this->fecha="";
+    this->dia=0;
+    this->mes=0;
+    this->year=0;
 
 }
-template <typename T>
-dias<T>::dias(int dia_ ,string fecha_ ,ListaSimple<T> eventos){
+
+Dias::Dias(int dia_ ,int mes, int year ,ListaSimple<Evento> eventos){
     this->Eventos = eventos;
-    this->fecha=fecha_;
-    this->numd=dia_;
+    this->dia=dia_;
+    this->mes=mes;
+    this->year=year;
 }
-
