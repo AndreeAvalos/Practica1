@@ -17,6 +17,7 @@
 #include "listadoble.cpp"
 #include "listadenlazada.cpp"
 #include "listasimple.cpp"
+#include "listaenlazadao.cpp"
 #include "evento.h"
 #include <QJsonArray>
 using namespace std;
@@ -43,9 +44,12 @@ void MainWindow::on_Eventos_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
-    int year = date.year();//Obtenemos el ano
-    int day=date.day();//obtenemos el dia
-    int mounth=date.month();//obtenemos el mes
+    int year = ui->calendarWidget->selectedDate().year();//Obtenemos el ano
+    int day=ui->calendarWidget->selectedDate().day();//obtenemos el dia
+    int mounth=ui->calendarWidget->selectedDate().month() ;//obtenemos el mes
+    dactual=day;
+    mactual=mounth;
+    yactual= year;
 
     ui->fecha->setText(ui->calendarWidget->selectedDate().toString("dd' de 'MMMM' del 'yyyy"));//Sirve para obtener la fecha del calendario
     ui->dia->setText(ui->calendarWidget->selectedDate().toString("dddd"));//Obtenemos el dia(ej.Lunes)
@@ -55,26 +59,29 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
     if(lstdias->empty()==false){
         if(lstdias->buscar(day,mounth,year)==true){
 
-            ListaSimple<Evento> actual = lstdias->getEvento(day,mounth,year);
+            ListaenlazadaO<Evento> actual = lstdias->getEvento(day,mounth,year);
             eventoE=actual;
             for(int i=0; i< actual.size;i++){
                 ui->Eventos->addItem(actual.getValor(i).titulo);
-            }
-
-
+           }
 
         }else{
 
         }
     }
+
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    //Lista de contactos
-
-    //lstContactos = new ListaDEnlazada<Contacto>();
-
+    Lugares nuevo(ui->Lnombre->text(), ui->Llatitud->text().toDouble(),ui->Llongitud->text().toDouble(),ui->Ldireccion->text());
+    lstlugares->add(nuevo);
+    ui->lstplaces->clear();
+    Nodo<Lugares> *temp= lstlugares->root;
+    while(temp!=nullptr){
+        ui->lstplaces->addItem(temp->data.nombre);
+        temp    = temp->Siguiente;
+    }
 
 }
 
@@ -98,7 +105,7 @@ void MainWindow::on_pushButton_12_clicked()
 
     doc=QJsonDocument::fromJson(archivo);//
     QJsonObject jObj = doc.object();//hacemos objeto el JSON
-    QJsonArray eventos = jObj["calendario"].toArray();//Obtenemos los valores de los eventos
+    QJsonArray eventos1 = jObj["calendario"].toArray();//Obtenemos los valores de los eventos
     QJsonArray contactos = jObj["contactos"].toArray();//Obtenemos los valores de los contactos
     QJsonArray lugares = jObj["lugares"].toArray();//Obtenemos los valores de los lugares
     QJsonObject ar1;
@@ -112,12 +119,19 @@ void MainWindow::on_pushButton_12_clicked()
 
     }
     //cargar lista de lugares
+    ui->lstplaces->clear();
     for(int i = 0 ; i < lugares.count();i++){
         ar1 = lugares.at(i).toObject();
         Lugares lugar (ar1["nombre"].toString(),ar1["latitud"].toDouble(),ar1["longitud"].toDouble(),ar1["direccion"].toString());
         lstlugares->add(lugar);
-        ui->lstplaces->addItem(ar1["nombre"].toString());
     }
+    ui->lstplaces->clear();
+    Nodo<Lugares> *temp= lstlugares->root;
+    while(temp!=nullptr){
+        ui->lstplaces->addItem(temp->data.nombre);
+        temp    = temp->Siguiente;
+    }
+    ui->lstcontacts->clear();
     //imprimir contactos en listview
     for(int i = 0; i< lstContactos->size;i++){
         ui->lstcontacts->addItem(lstContactos->getValor(i).nickname);
@@ -129,8 +143,8 @@ void MainWindow::on_pushButton_12_clicked()
     string line,linea2;
 
     //cargar lista de eventos
-    for(int i = 0 ; i<eventos.count();i++){
-        ar1 = eventos.at(i).toObject();
+    for(int i = 0 ; i<eventos1.count();i++){
+        ar1 = eventos1.at(i).toObject();
          QString linea=ar1["fecha"].toString();
         line = linea.toStdString();
         found = line.find("-");
@@ -145,7 +159,7 @@ void MainWindow::on_pushButton_12_clicked()
 
         qInfo()<<QString::fromStdString(fecha[0])<<" "<<QString::fromStdString(fecha[1])<<QString::fromStdString(fecha[2])<<endl;
         QJsonArray eventos = ar1["eventos"].toArray();
-        ListaSimple<Evento> lsteventos;
+        ListaenlazadaO<Evento> lsteventos;
         Evento ev;
         if(!eventos.isEmpty()){
             for(int j = 0; j < eventos.count();j++){
@@ -270,6 +284,7 @@ void MainWindow::on_Eventos_clicked(const QModelIndex &index)
 {
     ui->InfEvet->clear();
     int inde = index.row();
+    elegir=inde;
     Evento ev = eventoE.getValor(inde);
     ui->InfEvet->appendPlainText(ev.titulo);
     ui->InfEvet->appendPlainText(ev.descripcion);
@@ -282,6 +297,78 @@ void MainWindow::on_Eventos_clicked(const QModelIndex &index)
 void MainWindow::on_pushButton_9_clicked()
 {
 
+    Evento nuevo (ui->Etitulo->text(),ui->Edecripcion->toPlainText(),ui->Eduracion->text(),"",ui->Einicio->text(),lugar,invitados);
+    ListaenlazadaO<Evento> lsteventos;
+    int year = ui->calendarWidget->selectedDate().year();//Obtenemos el ano
+    int day= ui->calendarWidget->selectedDate().day();//obtenemos el dia
+    int mounth=ui->calendarWidget->selectedDate().month() ;//obtenemos el mes
+    dactual=day;
+    mactual=mounth;
+    yactual= year;
+
+    if(lstdias->empty()==false){
+
+        if(lstdias->buscar(dactual,mactual,yactual)==false){
+            lsteventos.add(nuevo);
+            qInfo()<< dactual<<mactual<<yactual;
+            Dias ndia (dactual,mactual,yactual,lsteventos);
+            lstdias->add(ndia);
+
+        }else{
+
+            lsteventos;
+            lsteventos = lstdias->getEvento(dactual,mactual,yactual);
+            lsteventos.add(nuevo);
+             qInfo()<< lsteventos.size;
+            lstdias->setDia(dactual,mactual,yactual,lsteventos);
+             qInfo()<< dactual<<mactual<<yactual;
+
+        }
+    }else{
+
+
+            lsteventos;
+            lsteventos.add(nuevo);
+                         qInfo()<< dactual<<mactual<<yactual;
+            Dias ndia (dactual,mactual,yactual,lsteventos);
+            lstdias->add(ndia);
+    }
+
+ /*if(lstdias->empty()==false){
+     ListaenlazadaO<Evento> lsteventos;
+    if(lstdias->buscar(dactual,mactual,yactual)==false){
+        lsteventos.add(nuevo);
+        Dias ndia (dactual,mactual,yactual,lsteventos);
+        lstdias->add(ndia);
+
+    }else{
+        ListaenlazadaO<Evento> lsteventos;
+        lsteventos = lstdias->getEvento(dactual,mactual,yactual);
+        lsteventos.add(nuevo);
+
+        //lstdias->setDia(dactual,mactual,yactual,lsteventos);
+
+    }
+ }else{
+ ListaenlazadaO<Evento> lsteventos;
+     lsteventos.add(nuevo);
+     Dias ndia (dactual,mactual,yactual,lsteventos);
+     lstdias->add(ndia);
+
+ }
+ ListaenlazadaO<Evento> lsteventos =lstdias->getEvento(dactual,mactual,yactual);
+*/
+ QDate firstFriday(yactual,mactual,dactual);
+ QTextCharFormat firstFridayFormat;
+ if(lsteventos.size!=0 && lsteventos.size<3){
+  firstFridayFormat.setBackground(Qt::lightGray);
+ }else if(lsteventos.size>=3 && lsteventos.size<5){
+     firstFridayFormat.setBackground(Qt::green);
+ }else if(lsteventos.size>=5){
+     firstFridayFormat.setBackground(Qt::darkGreen);
+ }
+ ui->calendarWidget->setDateTextFormat(firstFriday, firstFridayFormat);
+    proceso=lstdias->first;
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -291,7 +378,7 @@ void MainWindow::on_pushButton_2_clicked()
     if(proceso!=nullptr){
         Dias actual2 = proceso->data;
 
-    ListaSimple<Evento> actual =actual2.Eventos;
+    ListaenlazadaO<Evento> actual =actual2.Eventos;
     eventoE=actual;
     for(int i=0; i< actual.size;i++){
         ui->Eventos->addItem(actual.getValor(i).titulo);
@@ -307,11 +394,104 @@ void MainWindow::on_pushButton_clicked()
     if(proceso!=nullptr){
         Dias actual2 = proceso->data;
 
-    ListaSimple<Evento> actual =actual2.Eventos;
+    ListaenlazadaO<Evento> actual =actual2.Eventos;
     eventoE=actual;
     for(int i=0; i< actual.size;i++){
         ui->Eventos->addItem(actual.getValor(i).titulo);
     }
     proceso=proceso->Anterior;
     }
+}
+
+void MainWindow::on_btnCguardar_clicked()
+{
+    QString nombre,apellido,nickname, telefono,correo;
+    int edad;
+    nombre = ui->Cname->text();
+    apellido = ui->Capeliido->text();
+    nickname = ui->Cnickname->text();
+    telefono=ui->Ctelefono->text();
+    correo=ui->Ccorreo->text();
+    edad=atoi(ui->Cedad->text().toStdString().c_str());
+    Contacto nuevo (nombre,apellido,nickname,correo, edad,telefono);
+
+    ui->Cname->setEnabled(false);
+    ui->Capeliido->setEnabled(false);
+    ui->Cnickname->setEnabled(false);
+    ui->Cedad->setEnabled(false);
+    ui->Ctelefono->setEnabled(false);
+    ui->Ccorreo->setEnabled(false);
+
+    ui->Cname->clear();
+    ui->Capeliido->clear();
+    ui->Cnickname->clear();
+    ui->Cedad->clear();
+    ui->Ctelefono->clear();
+    ui->Ccorreo->clear();
+
+
+    lstContactos->add(nuevo);
+    ui->lstcontacts->clear();
+    for(int i = 0; i< lstContactos->size;i++){
+        ui->lstcontacts->addItem(lstContactos->getValor(i).nickname);
+    }
+
+}
+
+void MainWindow::on_btnagregar_clicked()
+{
+    ui->Cname->setEnabled(true);
+    ui->Capeliido->setEnabled(true);
+    ui->Cnickname->setEnabled(true);
+    ui->Cedad->setEnabled(true);
+    ui->Ctelefono->setEnabled(true);
+    ui->Ccorreo->setEnabled(true);
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    ui->comboBox->clear();
+    ui->comboBox_2->clear();
+    for(int i = 0; i<lstContactos->size;i++){
+        ui->comboBox->addItem(lstContactos->getValor(i).nickname);
+    }
+    for(int i = 0; i <lstlugares->size;i++){
+        ui->comboBox_2->addItem(lstlugares->getValor(i).nombre);
+    }
+}
+
+void MainWindow::on_comboBox_activated(int index)
+{
+   invitados+=lstContactos->getValor(index).nickname;
+   ui->comboBox->removeItem(index);
+}
+
+void MainWindow::on_comboBox_2_activated(int index)
+{
+    lugar=lstlugares->getValor(index).nombre;
+}
+
+void MainWindow::on_imprimir_clicked()
+{
+    this->lstlugares->imprimir();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    this->lstContactos->imprimir();
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    this->lstdias->imprimir();
+}
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    //rre
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+   lstdias->getEvento(dactual,mactual,yactual).eliminar(elegir);
 }

@@ -1,5 +1,5 @@
 #include "dias.h"
-#include "listasimple.cpp"
+
 
 Dias::Dias()
 {
@@ -9,7 +9,7 @@ Dias::Dias()
 
 }
 
-Dias::Dias(int dia_ ,int mes, int year ,ListaSimple<Evento> eventos){
+Dias::Dias(int dia_ ,int mes, int year ,ListaenlazadaO<Evento> eventos){
     this->Eventos = eventos;
     this->dia=dia_;
     this->mes=mes;

@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <Qt>
 #include <QJsonDocument>
+#include <QProcess>
 #include "nodo.cpp"
 template <typename T>
 ListaDEnlazada<T>::ListaDEnlazada()
@@ -22,59 +23,7 @@ bool ListaDEnlazada<T>::empty(){
        return false;//si la raiz tiene objetos, devuelve falso
    }
 }
-/*
-template <typename T>
-void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
-{
-    Nodo<T> *nuevo = new Nodo<T>();//Creamos un nodo
-   if(this->empty()==true){//Verificamos si el la lista esta vacia
-       first=nuevo;//hacemos el nuevo como primero
-       return;
-   }
-   if(first->Siguiente=nullptr){//Si solo hay un elemento
-       int compare = val.compare(first->data);//Compara los valores
-       if(compare>0){//Si el valor es mayor a 0 entonces directo al final
-           first->Siguiente=nuevo;//el primero apunta hacia el nuevo
-           nuevo->Anterior=first;//el nuevo apunta hacia el primero
-           return  ;//salimos del metodo
-       }
-       if(compare<0){//Si el valor es menor a 0
-           nuevo->Siguiente=first;//el nuevo apunta hacia el primero
-           first->Anterior=nuevo;//el primero apunta hacia el nuevo
-           first=nuevo;//el primero se vuelve el primero
-           return;//salimos del metodo
-       }
-   }
 
-   Nodo<T> *temp = first;
-   Nodo<T> *ant = nullptr;
-
-   while(temp->Siguiente!=nullptr){
-       int compare = val.compare(temp->data);
-       if(compare>0){
-           ant= temp;
-           temp = temp->Siguiente;
-           continue;
-       }
-       if(compare<0){
-           if(ant==nullptr){
-              nuevo->Siguiente=first;
-              first->Anterior=nuevo;
-              first=nuevo;
-           }else {
-               ant->Siguiente=nuevo;
-               nuevo->Anterior=ant;
-               nuevo->Siguiente=temp;
-               temp->Anterior=nuevo;
-           }
-           return;
-       }
-       return;
-   }
-   temp->Siguiente=nuevo;
-   nuevo->Anterior=temp;
-   size++;//aumentamos el tamano
-}*/
 template <typename T>
 void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
 {
@@ -97,6 +46,7 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
 
                     first->Siguiente = nuevo;
                     nuevo->Anterior=first;
+
                     size++;
                     return;
                 }
@@ -122,9 +72,9 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
             //primer elemento que sea "menor" que el valor nuevo.
             Nodo<T> *aux = first;
             Nodo<T> *ant = nullptr;
+            int comparison;
             while(aux->Siguiente != nullptr){
-                int comparison = val.compare(aux->data);
-
+                comparison = val.compare(aux->data);
                 //Es necesario evaluar el siguiente elemento
                 if(comparison > 0) {
                     ant = aux;
@@ -133,9 +83,8 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                 }
 
                 //El nuevo elemento va entre el elemento apuntado por ANT y AUX
-                if(comparison < 0) {
+                if(comparison <= 0) {
                     if(ant==nullptr) {
-
                         nuevo->Siguiente = first;
                         first->Anterior=nuevo;
                         first = nuevo;
@@ -149,12 +98,26 @@ void ListaDEnlazada<T>::add(T val)//Metodo para agregar registro
                     size++;
                     return;
                 }
-
+                qInfo()<<"error";
                 return;
             }
-
+            comparison = val.compare(aux->data);
+            if(comparison > 0) {
             aux->Siguiente = nuevo;
-            nuevo->Anterior=aux;
+            nuevo->Anterior=aux;}
+            if(comparison <= 0) {
+                if(ant==nullptr) {
+                    nuevo->Siguiente = first;
+                    first->Anterior=nuevo;
+                    first = nuevo;
+                } else {
+
+                    ant->Siguiente = nuevo;
+                    nuevo->Anterior=ant;
+                    nuevo->Siguiente = aux;
+                    aux->Anterior=nuevo;
+                }
+            }
             size++;
 
 }
@@ -194,9 +157,37 @@ void ListaDEnlazada<T>::ONombre(){
 }
 template <typename T>
 void ListaDEnlazada<T>::imprimir(){
-    Nodo<T> *temp = first;
-    while(temp!=nullptr){
-        qInfo()<< temp->data.toString();
-        temp = temp->Siguiente;
+    ofstream ficheroSalida;
+
+    ficheroSalida.open ("/home/andree/Escritorio/listaDobleEnlazadaOrdenada.txt");
+    ficheroSalida << "digraph{";
+
+    Nodo<T> *temp = first;//creamos un temporal para poder recorrecorlo
+
+    while(temp->Siguiente!= nullptr){//miramos si el valor es el ultimo nodo
+        //qInfo() << temp->data.titulo;//imprimimos el valor en consola
+
+        ficheroSalida << temp->data.nickname.toStdString();
+        ficheroSalida << "->";
+        temp = temp->Siguiente;//cambiamos de nodo
     }
+
+
+    ficheroSalida << temp->data.nickname.toStdString();
+    ficheroSalida << ";";
+
+    while(temp->Anterior!= nullptr){//miramos si el valor es el ultimo nodo
+        //qInfo() << temp->data.titulo;//imprimimos el valor en consola
+
+        ficheroSalida << temp->data.nickname.toStdString();
+        ficheroSalida << "->";
+        temp = temp->Anterior;//cambiamos de nodo
+    }
+
+    ficheroSalida << temp->data.nickname.toStdString();
+
+    ficheroSalida <<"}";
+     ficheroSalida.close();
+     system("dot -Tpng /home/andree/Escritorio/listaDobleEnlazadaOrdenada.txt -o /home/andree/Escritorio/listaDobleEnlazadaOrdenada.png");
+
 }

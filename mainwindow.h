@@ -52,13 +52,37 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_btnCguardar_clicked();
+
+    void on_btnagregar_clicked();
+
+    void on_pushButton_11_clicked();
+
+    void on_comboBox_activated(int index);
+
+    void on_comboBox_2_activated(int index);
+
+    void on_imprimir_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_14_clicked();
+
+    void on_pushButton_10_clicked();
+
 private:
     Ui::MainWindow *ui;
      ListaDEnlazada<Contacto> *lstContactos = new ListaDEnlazada<Contacto>();
      ListaSimple<Lugares> *lstlugares = new ListaSimple<Lugares>();
      ListaDoble<Dias> *lstdias = new ListaDoble<Dias>();
-     ListaSimple<Evento> eventoE;
-     Nodo<Dias> *proceso = lstdias->first;
+     ListaenlazadaO<Evento> eventoE;
+     Nodo<Dias> *proceso;
+     QString invitados="";
+     QString lugar="";
+     int dactual,mactual,yactual=0;
+     int elegir;
 };
 
 #endif // MAINWINDOW_H

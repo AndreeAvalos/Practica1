@@ -1,7 +1,6 @@
 #ifndef EVENTO_H
 #define EVENTO_H
 #include <QString>
-#include "listasimple.h"
 
 class Evento
 {
@@ -15,6 +14,11 @@ public:
     QString lugar;
     QString contactos;
     Evento(QString,QString,QString,QString,QString,QString,QString);
+
+    int compare(Evento val){
+        int compare = this->hInicio.compare(val.hInicio);
+        return compare;
+    }
 };
 
 #endif // EVENTO_H

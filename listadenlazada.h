@@ -33,7 +33,6 @@ public:
         return valor;
     }
     int size;
-private:
     Nodo<T> *first;
 
 };

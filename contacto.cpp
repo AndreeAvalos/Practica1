@@ -20,6 +20,7 @@ Contacto::Contacto(QString nombre,QString apellido,QString nickname,QString corr
     this->telefono=tel;
     this->correo=correo;
 }
+
 int Contacto::compare(Contacto contacto){
     int comparacion = this->nickname.compare(contacto.nickname);
     return comparacion;

@@ -25,26 +25,97 @@ void ListaDoble<T>::add(T dato){
      Nodo<T> *nuevo = new Nodo<T>(dato);//creamos un nuevo nodo
     if(empty()==true){//verifica si esta vacia
         first=nuevo;//el primero toma el valor del nuevo nodo
-        last=nuevo;//el ultimo toma el valor del nuevo nodo
-        first->Siguiente=last;//enlazamos el primero con el ultimo
-        last->Anterior= first;//enlazamos el ultimo con el primero
+        first->Siguiente = first;//enlazamos el primero con el ultimo
+        first->Anterior = first;//enlazamos el ultimo con el primero
+        last=first;
     }else{//Si no esta vacia la lista se procede a insertar al inicio
-        nuevo->Siguiente=first;//el nuevo apunta hacia el primero
-        first->Anterior=nuevo;//el primero apunta hacia el nuevo
-        last->Siguiente=nuevo;//el ultimo apunta hacia el nuevo
-        nuevo->Anterior=last;//el nuevo apunta hacia el ultimo
-        first = nuevo;//cambiamos de primero por el nuevo
+        last->Siguiente=nuevo;
+        nuevo->Siguiente=first;
+        nuevo->Anterior=last;
+        last=nuevo;
+        first->Anterior=last;
+
     }
     size++;
 }
 template <typename T>
 void ListaDoble<T>::imprimir(){
+    ofstream ficheroSalida;
+    ficheroSalida.open ("/home/andree/Escritorio/ListaDoble.txt");
+    ficheroSalida << "digraph{";
+    QString fecha;
     Nodo<T> *temp = first;//creamos un nodo temporal
-    while (temp->Siguiente!=first) {//Recorremos mientras el temporal sea diferente del primero
-        qInfo()<< temp->data;//imprimimos
+    if(temp==first){
+     fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+     ficheroSalida << fecha.toStdString() ;
+    }
+    temp=temp->Siguiente;
+    while (temp!=first) {//Recorremos mientras el temporal sea diferente del primero
+        fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+        ficheroSalida << "->" ;
+         ficheroSalida << fecha.toStdString() ;
+        // qInfo()<< fecha ;//imprimimos
         temp = temp->Siguiente;//el temporal es el siguiente
     }
-    qInfo()<<temp->data;//imprimimos el ultimo elemento
+    ficheroSalida << ";";
+    temp = last;
+    if(temp==last){
+        fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+        ficheroSalida << fecha.toStdString() ;
+
+    }
+    temp=temp->Anterior;
+    while (temp!=last) {//Recorremos mientras el temporal sea diferente del primero
+        fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+        ficheroSalida << "->" ;
+         ficheroSalida << fecha.toStdString() ;
+        // qInfo()<< fecha ;//imprimimos
+        temp = temp->Anterior;//el temporal es el siguiente
+    }
+
+    ficheroSalida << ";";
+    temp = first;
+    if(temp==first){
+     fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+     ficheroSalida << fecha.toStdString() ;
+     ficheroSalida << "->" ;
+     Nodo<Evento> *temp2=temp->data.Eventos.first;
+     ficheroSalida << '\"' << temp2->data.titulo.toStdString() <<'\"';
+     while(temp2!=nullptr){
+         if(temp2!=temp->data.Eventos.first){
+         ficheroSalida << "->" ;
+         ficheroSalida << '\"' << temp2->data.titulo.toStdString() <<'\"';}
+
+
+         temp2=temp2->Siguiente;}
+
+
+    }
+
+    temp=temp->Siguiente;
+
+    while (temp!=first) {//Recorremos mientras el temporal sea diferente del primero
+        fecha = '\"' +QString::number(temp->data.dia) + "-"+ QString::number(temp->data.mes)+"-"+QString::number(temp->data.year)+'\"' ;
+        ficheroSalida << fecha.toStdString() ;
+        ficheroSalida << "->" ;
+
+         Nodo<Evento> *temp2=temp->data.Eventos.first;
+         ficheroSalida << '\"' << temp2->data.titulo.toStdString() <<'\"';
+         while(temp2!=nullptr){
+             if(temp2!=temp->data.Eventos.first){
+             ficheroSalida << "->" ;
+             ficheroSalida << '\"' << temp2->data.titulo.toStdString() <<'\"';}
+
+
+             temp2=temp2->Siguiente;}
+         ficheroSalida << ";";
+        // qInfo()<< fecha ;//imprimimos
+        temp = temp->Siguiente;//el temporal es el siguiente
+    }
+    //qInfo()<<fecha;//imprimimos el ultimo elemento
+    ficheroSalida <<"}";
+     ficheroSalida.close();
+     system("fdp -Tpng /home/andree/Escritorio/ListaDoble.txt -o /home/andree/Escritorio/ListaDoble.png");
 
 }
 

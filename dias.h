@@ -1,6 +1,6 @@
 #ifndef DIAS_H
 #define DIAS_H
-#include "listasimple.h"
+#include "listaenlazadao.h"
 #include "evento.h"
 
 class Dias
@@ -8,9 +8,10 @@ class Dias
 public:
     Dias();
     int dia,mes,year;
-    ListaSimple<Evento> Eventos;
-    Dias(int,int,int,ListaSimple<Evento>);
-    void setEventos(ListaSimple<Evento> evt){
+    ListaenlazadaO<Evento> Eventos;
+    Dias(int,int,int,ListaenlazadaO<Evento>);
+
+    void setEventos(ListaenlazadaO<Evento> evt){
         this->Eventos=evt;
     }
 };

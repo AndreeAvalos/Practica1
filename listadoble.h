@@ -19,16 +19,19 @@ public:
     bool empty();//verifica si esta vacia
     void imprimir();//metodo para imprimir lista
 
-    ListaSimple<Evento> getEvento(int dia, int mes, int year){
+    ListaenlazadaO<Evento> getEvento(int dia, int mes, int year){
         Nodo<T> *temp = first;
-        ListaSimple<Evento> valor;
 
-        while(temp!=nullptr){
+        ListaenlazadaO<Evento> valor;
+        if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year&& temp==first){
+            return temp->data.Eventos;
+        }
+        temp = temp->Siguiente;
+        while(temp!=first){
 
             if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
                 Dias actual=temp->data;
                 valor = actual.Eventos;
-             return valor;
             }
             temp =temp->Siguiente;
         }
@@ -38,16 +41,35 @@ public:
 
     bool buscar(int dia, int mes, int year){
          Nodo<T> *temp = first;
-         if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
+
+         if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year&&temp==first){
              return true;
          }
-        while(temp->Siguiente!=first){
+          temp = temp->Siguiente;
+        while(temp!=first){
             if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
              return true;
             }
             temp =temp->Siguiente;
         }
         return false;
+    }
+    void setDia(int dia, int mes, int year, ListaenlazadaO<Evento> evt){
+        Nodo<T> *temp = first;
+
+        ListaenlazadaO<Evento> valor;
+        if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year&& temp==first){
+            temp->data.Eventos=evt;
+        }
+        while(temp->Siguiente!=first){
+
+            if(temp->data.dia==dia&&temp->data.mes==mes&&temp->data.year==year){
+               temp->data.Eventos=evt;
+            }
+            temp =temp->Siguiente;
+        }
+        return;
+
     }
 
     Nodo<T> *first, *last;

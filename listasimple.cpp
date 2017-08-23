@@ -41,9 +41,21 @@ void ListaSimple<T>::add(T dato){
 //metodo para imprimir
 template<typename T>
 void ListaSimple<T>::imprimir(){
+    ofstream ficheroSalida;
+    ficheroSalida.open ("/home/andree/Escritorio/listasimple.txt");
+ficheroSalida << "digraph{";
+
     Nodo<T> *temp = root;//creamos un temporal para poder recorrecorlo
+    ficheroSalida <<'\"'<< temp->data.nombre.toStdString()<<'\"';
     while(temp!= nullptr){//miramos si el valor es el ultimo nodo
-        qInfo() << temp->data.titulo;//imprimimos el valor en consola
+        //qInfo() << temp->data.titulo;//imprimimos el valor en consola
+        if(temp!=root){
+        ficheroSalida << "->";
+        ficheroSalida << '\"'<<temp->data.nombre.toStdString()<<'\"';}
         temp = temp->Siguiente;//cambiamos de nodo
     }
+    ficheroSalida << "}";
+     ficheroSalida.close();
+     system("dot -Tpng /home/andree/Escritorio/listasimple.txt -o /home/andree/Escritorio/listasimple.png");
+
 }
